@@ -216,3 +216,11 @@
 
   This will require some finagling to get it done, but it is fully doable.
 ]
+
+
+#section(color: red)[Kitchen sink]
+
+#slide(title: "Title is longer than the content width", width: 10%)[
+  This slide is here to test that when the slide content is _very narrow_, the text and the footer can actually overlap
+
+]

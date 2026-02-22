@@ -24,7 +24,7 @@
 // These variables are for page size
 #let _left_margin = 1 / 32 * 100%
 #let _right_margin = 2 * _left_margin
-#let _bottom_margin = 1 / 14 * 100%
+#let _bottom_margin = 1.25 / 18 * 100%
 #let _top_margin = 2 * _bottom_margin
 
 // These state are used to illustrate slides, i.e. to put content in the space that is not occupied by the main text when there is main text in a slide
