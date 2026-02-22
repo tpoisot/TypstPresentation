@@ -220,7 +220,34 @@
 
 #slide(title: "Specifying the order of apparition", width: 80%)[
 
-  There are four ways to
+  #v(1fr)
+
+  #show table.cell.where(y: 0): strong
+  #set table(
+    inset: 10pt,
+    stroke: (x, y) => if y == 0 {
+      (bottom: 0.7pt + black)
+    } else {
+      (bottom: 0.1pt + black)
+    },
+    align: (x, y) => if x == 3 { left } else { center },
+  )
+
+  #align(top)[
+    #table(
+      columns: (1fr, 1fr, 1fr, 5fr),
+      table.header([on], [until], [from], [result]),
+      [1], [], [], [#reveal(on: 1)[on slide 1 only]],
+      [], [2], [], [#reveal(until: 2)[until slide 2]],
+      [], [4], [2], [#reveal(until: 4, from: 2)[between slide 2 and 4]],
+      [1], [], [3], [#reveal(on: 1, from: 3)[on slide 1 and then from 3]],
+      [], [], [2], [#reveal(from: 2)[starting from slide 2]],
+    )
+  ]
+
+  #v(1fr)
+  _  We are currently on stage #for stage in range(1, 5) { pop(on: stage)[#stage] }_
+
 
 ]
 
