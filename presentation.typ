@@ -32,7 +32,6 @@
   ]
 ]
 
-
 #slide(title: "Useful packages", width: 75%)[
 
   Here is a selection of very useful packages for slides, which can be added at the top of the document to use them:
@@ -60,6 +59,12 @@
 
   This article is Open Access #open-access-icon(color: orange, height: 1.1em, baseline: 20%) (this icon is from `scienceicons`, which the slides template will load anyways!)
 
+]
+
+#slide(title: "Additional markup")[
+  Text can be #hl[highlighted] with `#hl` - the color will be picked from the section color
+
+  Code can specifically be highlighted with `kbd`: #kbd("localhost%")
 ]
 
 #section[Layout]
@@ -179,4 +184,12 @@
   ```typst
   #section(display: false)[New section with no title slide]
   ```
+]
+
+#section[Fletcher and animations]
+
+#slide(title: "Introduction")[
+This gets its own section because animations with `fletcher` are not particularly intuitive.
+
+This will require some finagling to get it done, but it is fully doable.
 ]
