@@ -152,7 +152,6 @@
 )
 
 #let slides(
-  ratio: "16-9",
   textfont: "Inter Display",
   mathfont: "STIX Two Math",
   rawfont: "JuliaMono",
@@ -181,7 +180,7 @@
   }
 
   // Setup the page
-  set page(paper: "presentation-" + ratio)
+  set page(paper: "presentation-16-9")
   set page(margin: (left: _left_margin, right: _left_margin, top: _bottom_margin, bottom: _bottom_margin))
 
   // Text and equation styling

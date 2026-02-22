@@ -2,7 +2,6 @@
 #import "@preview/colorful-boxes:1.4.3": stickybox
 
 #show: slides.with(
-  ratio: "16-9",
   textfont: "Figtree",
   mathfont: "Libertinus Math",
   rawfont: "Iosevka Custom",
@@ -36,23 +35,30 @@
 
 #slide(title: "Useful packages", width: 75%)[
 
-  Here is a selection of very useful packages for slides
+  Here is a selection of very useful packages for slides, which can be added at the top of the document to use them:
 
   ```typst
   #import "@preview/colorful-boxes:1.4.3": stickybox
   #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
-  #import "@preview/scienceicons:0.1.0": open-access-icon
+  #import "@preview/scienceicons:0.1.0": *
   ```
 
-  #illustration[#stickybox(rotation: 5deg)[#text(
-      font: "Special Elite",
-    )[The colorful-boxes package is good because you can use post-it style callouts on your slides]]
+  #illustration[
+    #stickybox(rotation: 5deg)[
+      #text(font: "Special Elite")[
+        The colorful-boxes package is good because you can use post-it style callouts on your slides
+      ]
+    ]
+    #v(1em)
+    #stickybox(rotation: -7deg, fill: rgb("#33ff57").lighten(60%))[
+      #text(font: "Special Elite")[
+        If you use fletcher, it is much better to load it in a separate file that contains the entire diagram
+      ]
+    ]
+
   ]
 
-
-  This article is Open Access #open-access-icon(color: orange, height: 1.1em, baseline: 20%) (this icon is from `scienceicons`)
-
-
+  This article is Open Access #open-access-icon(color: orange, height: 1.1em, baseline: 20%) (this icon is from `scienceicons`, which the slides template will load anyways!)
 
 ]
 
