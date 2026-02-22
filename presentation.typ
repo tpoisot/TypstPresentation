@@ -1,5 +1,6 @@
 #import "lib/slides.typ": *
 #import "@preview/colorful-boxes:1.4.3": stickybox
+#import "@preview/pinit:0.2.2": *
 
 #show: slides.with(
   textfont: "Liberation Sans",
@@ -32,14 +33,19 @@
   ]
 ]
 
-#slide(title: "Useful packages", width: 75%)[
+#slide(title: "Useful packages", width: 80%)[
 
   Here is a selection of very useful packages for slides, which can be added at the top of the document to use them:
 
   ```typst
+  // Post-it notes
   #import "@preview/colorful-boxes:1.4.3": stickybox
+  // Diagrams
   #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+  // Icons
   #import "@preview/scienceicons:0.1.0": *
+  // Pins and annotations
+  #import "@preview/pinit:0.2.2": *
   ```
 
   #illustration[
@@ -57,7 +63,24 @@
 
   ]
 
-  This article is Open Access #open-access-icon(color: orange, height: 1.1em, baseline: 20%) (this icon is from `scienceicons`, which the slides template will load anyways!)
+  This Open Access #open-access-icon(color: orange, height: 1.1em, baseline: 20%) icon is from `scienceicons`, which the slides template will load anyways!
+
+]
+
+#slide(title: "Using pinit")[
+
+  The slides support the `pinit` package natively -- the usual caveats about placement with `pinit` apply, see the package documentation
+
+  \
+
+  This text can be #pin(1)highlighted#pin(2) by `pinit`. The pins can also be #pin(3)animated#pin(4)
+
+  #pinit-highlight(1, 2)
+
+  #reveal(on: 2)[
+    #pinit-highlight(3, 4)
+    #pinit-point-from(4)[Like this]
+  ]
 
 ]
 
@@ -189,7 +212,7 @@
 #section[Fletcher and animations]
 
 #slide(title: "Introduction")[
-This gets its own section because animations with `fletcher` are not particularly intuitive.
+  This gets its own section because animations with `fletcher` are not particularly intuitive.
 
-This will require some finagling to get it done, but it is fully doable.
+  This will require some finagling to get it done, but it is fully doable.
 ]
