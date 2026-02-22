@@ -2,9 +2,9 @@
 #import "@preview/colorful-boxes:1.4.3": stickybox
 
 #show: slides.with(
-  textfont: "Figtree",
-  mathfont: "Libertinus Math",
-  rawfont: "Iosevka Custom",
+  textfont: "Liberation Sans",
+  mathfont: "Liberation Serif",
+  rawfont: "Liberation Mono",
 )
 
 #slide(title: "Hi!")[
