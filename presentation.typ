@@ -69,7 +69,9 @@
 
 #slide(title: "Using pinit")[
 
-  The slides support the `pinit` package natively -- the usual caveats about placement with `pinit` apply, see the package documentation
+  The slides support the `pinit` package natively -- the usual caveats about placement with `pinit` apply, see the package documentation.
+
+  In addition, the `pint-point-from` function may not reserve its space on the slide, and using it with `reveal` might overlap with future text. #reveal(on: 2)[This will usually result in a `layout did not converge` warning, which should not prevent the document from rendering.]
 
   \
 
@@ -77,9 +79,10 @@
 
   #pinit-highlight(1, 2)
 
-  #reveal(on: 2)[
+  #reveal(on: 3)[
     #pinit-highlight(3, 4)
-    #pinit-point-from(4)[Like this]
+    #pinit-point-from(4)[or this]
+    #pinit-point-from(2)[Like this]
   ]
 
 ]
@@ -222,5 +225,4 @@
 
 #slide(title: "Title is longer than the content width", width: 10%)[
   This slide is here to test that when the slide content is _very narrow_, the text and the footer can actually overlap
-
 ]
