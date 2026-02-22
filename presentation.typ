@@ -162,7 +162,7 @@
 #slide(title: "What about grids?", width: 70%)[
   The `grid` function works fine for more complex layouts, _but_ cannot be used together with the `reveal` and `pop` functions for slide transitions. The `illustrate` function works well for this usage.
 
-  #pop(on: 2)[#illustration[#align(horizon + center)[#rotate(-90deg)[#text(
+  #reveal(on: 2)[#illustration[#align(horizon + center)[#rotate(-90deg)[#text(
     red,
     weight: "black",
     size: 40pt,
@@ -173,6 +173,41 @@
 
 #slide(title: "Fundamentals", width: 60%)[
   There are two types of transitions
+
+  Transitions that `reveal` will reserve their space, and transitions that `pop` do not.
+
+  #illustration[
+
+    #reveal(on: 5)[
+      #block(
+        fill: purple.lighten(90%),
+        inset: 10pt,
+        width: 100%,
+      )[This element is revealed on stage 5]
+    ]
+
+    #pop(from: 3)[
+      #block(
+        fill: blue.lighten(90%),
+        inset: 10pt,
+        width: 100%,
+      )[This element will pop in at stage 3]
+    ]
+
+    #reveal(from: 2, until: 5)[
+      #block(
+        fill: green.lighten(90%),
+        inset: 10pt,
+        width: 100%,
+      )[This element is revealed from stage 2, and will remain until stage 4]
+    ]
+
+  ]
+
+  We are on stage 
+  #for stage in (1, 2, 3, 4, 5) {
+    pop(on: stage)[#stage]
+  }
 
 ]
 
@@ -228,11 +263,13 @@
 ]
 
 #slide(title: "Stages debug")[
-  This should be 1: #__get_max_from_reveal_element(on: 1)
+  This should be 1: #__get_max_from_reveal_element(on: 1) #reveal(on: 1)[and present on slide 1]
 
-  This should be 3: #__get_max_from_reveal_element(until: 3)
+  This should be 3: #__get_max_from_reveal_element(until: 3) #reveal(from: 3)[and present after slide 3]
 
-  This should be 2: #__get_max_from_reveal_element(from: 2)
+  This should be 2: #__get_max_from_reveal_element(from: 2) #reveal(until: 2)[and present on 1 and 2]
 
-  This should be 5: #__get_max_from_reveal_element(on: 5, until: 3)
+  This should be 5: #__get_max_from_reveal_element(on: 5, until: 3) #reveal(on: 1, from: 3)[and present on 1 and then from 3]
+
+  #pop(on: 4)[This shows up on slide 4 only]
 ]

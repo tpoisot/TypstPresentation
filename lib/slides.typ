@@ -19,7 +19,7 @@
 // rendering later slide stages
 #let mstage = counter("mstage")
 #let nstage = counter("nstage")
-#let isprobe = counter("isprobe")
+#let in_layout_stage = state("inlayoutstage", true)
 
 // These variables are for page size
 #let _left_margin = 1 / 32 * 100%
@@ -31,33 +31,14 @@
 #let illustration_is_on_the_left = state("illustrateleft", true)
 #let slide_content_width = state("contentwidth", 100%)
 
-// This function determines whether an element included in pop or reveal must be
-// rendered on a given slide stage. When the isprobe counter is set to 1, it
-// will also update the maximal value of the mstage counter, so that it takes
-// the maximum value (max number of stages for the slide).
-#let _stage_builder(on: 1, pop: false, body) = {
-  // Determine probe vs render via the `isprobe` counter.
-  context {
-    if (isprobe.get().first() == 1) {
-      // During probe, just update mstage, don't output
-      if (on > mstage.get().first()) {
-        mstage.update(on)
-      }
-    }
-    if (nstage.get().first() == on) {
-      // During render, output content for matching stage
-      body
-    } else {
-      if (not pop) {
-        hide(body)
-      }
-    }
-  }
-}
-
 // This is the function we use to determine the maximum number of stages when we need  multi-stage slides. The initial max is `on`.
 #let __get_max_from_reveal_element(on: 1, until: none, from: none) = {
-  let current_maximum = on
+  let current_maximum = 1
+  if on != none {
+    if on > current_maximum {
+      current_maximum = on
+    }
+  }
   if until != none {
     if until > current_maximum {
       current_maximum = until
@@ -71,14 +52,59 @@
   return current_maximum
 }
 
+// This function determines whether an element included in pop or reveal must be
+// rendered on a given slide stage
+#let _stage_builder(on: 1, until: none, from: none, pop: false, body) = {
+  // If we are in layout stage, we do not render anything, but simply look at the maximum value for the number of stages
+  context {
+    if in_layout_stage.get() {
+      let element_stage = __get_max_from_reveal_element(on: on, until: until, from: from)
+      if element_stage > mstage.get().first() {
+        mstage.update(element_stage)
+      }
+    }
+  }
+
+  // If we are not in layout stage, then we can render. There are a few situations in which we render an element
+  context {
+    let element_is_rendered = false
+    if on != none {
+      if nstage.get().first() == on {
+        element_is_rendered = true
+      }
+    }
+    if until != none {
+      if nstage.get().first() <= until {
+        element_is_rendered = true
+      } else {
+        element_is_rendered = false
+      }
+    }
+    if from != none {
+      if nstage.get().first() >= from {
+        element_is_rendered = true
+      } else {
+        element_is_rendered = false
+      }
+    }
+    if element_is_rendered {
+      body
+    } else {
+      if (not pop) {
+        hide(body)
+      }
+    }
+  }
+}
+
 // The reveal function will reserve space in the layout
-#let reveal(on: 1, until: none, from: none, body) = {
-  _stage_builder(on: on, pop: false, body)
+#let reveal(on: none, until: none, from: none, body) = {
+  _stage_builder(on: on, until: until, from: from, pop: false, body)
 }
 
 // The pop function will add things to the layout
-#let pop(on: 1, body) = {
-  _stage_builder(on: on, pop: true, body)
+#let pop(on: none, until: none, from: none, body) = {
+  _stage_builder(on: on, until: until, from: from, pop: true, body)
 }
 
 // This function is used to handle slides with a space for illustration, in order to avoid using calls to grid, which does not play nice with reveal functions
@@ -315,7 +341,6 @@
 
     if illustration_is_on_the_left.get() {
       x_starting_offset = -(100% - slide_content_width.get()) * slide_display_width
-      //x_starting_offset = -here().position().x
     }
 
     place(horizon + left, dx: x_starting_offset, block(width: usable_width, ..style)[#body])
@@ -340,16 +365,17 @@
 
     // We keep track of the elements that are popping in over time
     mstage.update(0)
+    nstage.update(0)
 
     // We add an entry to the TOC
     heading(level: 2)[#title]
 
     // This is the first pass we render
     // Probe pass: scan for stages and render stage 1 content
-    isprobe.update(1)
+    in_layout_stage.update(true)
     nstage.update(1)
     _render_slide_in_full(title: title, body)
-    isprobe.update(0)
+    in_layout_stage.update(false)
   }
 
   context {
