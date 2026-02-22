@@ -55,8 +55,24 @@
   }
 }
 
+// This is the function we use to determine the maximum number of stages when we need  multi-stage slides. The initial max is `on`.
+#let __get_max_from_reveal_element(on: 1, until: none, from: none) = {
+  let current_maximum = on
+  if until != none {
+    if until > current_maximum {
+      current_maximum = until
+    }
+  }
+  if from != none {
+    if from > current_maximum {
+      current_maximum = from
+    }
+  }
+  return current_maximum
+}
+
 // The reveal function will reserve space in the layout
-#let reveal(on: 1, body) = {
+#let reveal(on: 1, until: none, from: none, body) = {
   _stage_builder(on: on, pop: false, body)
 }
 

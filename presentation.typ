@@ -226,3 +226,13 @@
 #slide(title: "Title is longer than the content width", width: 10%)[
   This slide is here to test that when the slide content is _very narrow_, the text and the footer can actually overlap
 ]
+
+#slide(title: "Stages debug")[
+  This should be 1: #__get_max_from_reveal_element(on: 1)
+
+  This should be 3: #__get_max_from_reveal_element(until: 3)
+
+  This should be 2: #__get_max_from_reveal_element(from: 2)
+
+  This should be 5: #__get_max_from_reveal_element(on: 5, until: 3)
+]
