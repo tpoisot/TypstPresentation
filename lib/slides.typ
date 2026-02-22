@@ -165,6 +165,10 @@
   background: none,
   body,
 ) = {
+  // We do not actually show the headings - but we keep track of where we
+  // actually are in the presentation
+  show heading: none
+
   // Update the important states
   stl.update(shorttitle)
   sec.update(introduction)
@@ -192,6 +196,9 @@
   // First slide
   set page(background: __render_page_background(title: true))
   titleslide(title: title, subtitle: subtitle, venue: venue, authors: authors)
+
+  // Before we start the content we add the intro section to the TOC
+  heading(level: 1)[#introduction]
 
   // We set the default margin for content slides here
   set page(margin: (left: _left_margin, right: _right_margin, top: _top_margin, bottom: _bottom_margin))
@@ -318,6 +325,9 @@
     // We keep track of the elements that are popping in over time
     mstage.update(0)
 
+    // We add an entry to the TOC
+    heading(level: 2)[#title]
+
     // This is the first pass we render
     // Probe pass: scan for stages and render stage 1 content
     isprobe.update(1)
@@ -346,6 +356,7 @@
       pnum.step()
     }
     sec.update(body)
+    heading(level: 1)[#body]
     col.update(color)
     if display {
       set page(fill: col.get())
