@@ -1,5 +1,5 @@
 #import "lib/slides.typ": *
-#import "@preview/scienceicons:0.1.0": bluesky-icon, email-icon, open-access-icon, website-icon
+#import "@preview/colorful-boxes:1.4.3": stickybox
 
 #show: slides.with(
   ratio: "16-9",
@@ -31,6 +31,29 @@
     )
     ```
   ]
+]
+
+
+#slide(title: "Useful packages", width: 75%)[
+
+  Here is a selection of very useful packages for slides
+
+  ```typst
+  #import "@preview/colorful-boxes:1.4.3": stickybox
+  #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+  #import "@preview/scienceicons:0.1.0": open-access-icon
+  ```
+
+  #illustration[#stickybox(rotation: 5deg)[#text(
+      font: "Special Elite",
+    )[The colorful-boxes package is good because you can use post-it style callouts on your slides]]
+  ]
+
+
+  This article is Open Access #open-access-icon(color: orange, height: 1.1em, baseline: 20%) (this icon is from `scienceicons`)
+
+
+
 ]
 
 #section[Layout]
@@ -126,7 +149,7 @@
 
 
 #slide(title: "What do sections do?")[
-  Sections of the talk are marked with 
+  Sections of the talk are marked with
 
   ```typst
   #section[Section title]
