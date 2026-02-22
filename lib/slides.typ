@@ -55,22 +55,24 @@
 // This function determines whether an element included in pop or reveal must be
 // rendered on a given slide stage
 #let _stage_builder(on: 1, until: none, from: none, pop: false, body) = {
-  // If we are in layout stage, we do not render anything, but simply look at the maximum value for the number of stages
   context {
     if in_layout_stage.get() {
+      // If we are in layout stage, we do not render anything, but simply look at
+      // the maximum value for the number of stages
+
       let element_stage = __get_max_from_reveal_element(on: on, until: until, from: from)
       if element_stage > mstage.get().first() {
         mstage.update(element_stage)
       }
     }
-  }
+    // If we are not in layout stage, then we can render. There are a few situations in which we render an element
 
-  // If we are not in layout stage, then we can render. There are a few situations in which we render an element
-  context {
     let element_is_rendered = false
-    if on != none {
-      if nstage.get().first() == on {
+    if from != none {
+      if nstage.get().first() >= from {
         element_is_rendered = true
+      } else {
+        element_is_rendered = false
       }
     }
     if until != none {
@@ -80,11 +82,9 @@
         element_is_rendered = false
       }
     }
-    if from != none {
-      if nstage.get().first() >= from {
+    if on != none {
+      if nstage.get().first() == on {
         element_is_rendered = true
-      } else {
-        element_is_rendered = false
       }
     }
     if element_is_rendered {

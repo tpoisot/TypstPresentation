@@ -181,22 +181,25 @@
     #reveal(on: 5)[
       #block(
         fill: purple.lighten(90%),
+        stroke: stroke(dash: "dashed", paint: purple.lighten(30%), thickness: 1pt),
         inset: 10pt,
         width: 100%,
-      )[This element is revealed on stage 5]
+      )[This purple element is revealed on stage 5]
     ]
 
     #pop(from: 3)[
       #block(
         fill: blue.lighten(90%),
+        stroke: stroke(dash: "dashed", paint: blue.lighten(30%), thickness: 1pt),
         inset: 10pt,
         width: 100%,
-      )[This element will pop in at stage 3]
+      )[The blue element will pop in at stage 3]
     ]
 
-    #reveal(from: 2, until: 5)[
+    #reveal(from: 2, until: 4)[
       #block(
         fill: green.lighten(90%),
+        stroke: stroke(dash: "dashed", paint: green.lighten(30%), thickness: 1pt),
         inset: 10pt,
         width: 100%,
       )[This element is revealed from stage 2, and will remain until stage 4]
@@ -204,10 +207,14 @@
 
   ]
 
-  We are on stage 
+  We are on stage
   #for stage in (1, 2, 3, 4, 5) {
     pop(on: stage)[#stage]
   }
+
+  #v(5em)
+
+  *Known bug*: when the animations are in another function, they sometimes fail to render their final stages. Add a `#pop(on: n)[]` at the end of the slide with an empty string and this will fix it
 
 ]
 
