@@ -253,6 +253,34 @@
 
 ]
 
+#slide(title: "Conditional formatting", width: 80%)[
+
+  The `onstage(n)` function returns `true` when the slide is currently on stage `n`, and this can be used for conditional formatting.
+
+  #illustration[
+    #block(
+      fill: luma(88%),
+      stroke: red,
+      inset: 10pt,
+      width: 100%,
+    )[
+      This element is always present, but has a border in stage 2, and a background in stage 3.
+
+      #context {
+        nstage.get().first()
+      }
+      
+      #type[#onstage(2, red, blue)]
+      #onstage(3, orange, red)
+
+    ]
+  ]
+
+  // #stages(3)
+
+]
+
+
 #section(color: rgb("#6b326aff"))[Section slides]
 
 

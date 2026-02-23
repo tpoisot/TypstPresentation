@@ -111,7 +111,24 @@
 // through
 #let stages(body) = {
   context {
-    mstage.update(body)
+    return mstage.update(body)
+  }
+}
+
+// This function is used to tell us whether we are on a specific stage of the
+// animation, this is useful for conditional formatting
+#let onstage(n, c1, c2) = {
+  context {
+    if in_layout_stage.get() {
+      if n > mstage.get().first() {
+        return mstage.update(n)
+      }
+    }
+    if n == nstage.get().first() {
+      [#type(c1)]
+    } else {
+      [#type(c2)]
+    }
   }
 }
 
