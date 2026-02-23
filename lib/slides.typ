@@ -254,7 +254,7 @@
   set text(font: textfont)
   set par(leading: 10pt, justify: false)
   show math.equation: set text(font: mathfont)
-  show raw: set text(font: rawfont, size: 15pt)
+  show raw: set text(font: rawfont, size: 14pt)
 
   // First slide
   set page(background: __render_page_background(title: true))

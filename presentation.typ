@@ -3,9 +3,9 @@
 #import "@preview/pinit:0.2.2": *
 
 #show: slides.with(
-  textfont: "Liberation Sans",
-  mathfont: "Liberation Serif",
-  rawfont: "Liberation Mono",
+  textfont: "Figtree",
+  mathfont: "Libertinus Math",
+  rawfont: "Iosevka Custom",
 )
 
 #slide(title: "Hi!")[
@@ -316,6 +316,25 @@
   This gets its own section because animations with `fletcher` are not particularly intuitive.
 
   This will require some finagling to get it done, but it is fully doable.
+]
+
+#slide(title: "What you need to know")[
+  The diagrams in `fletcher` are specificied as (essentially) a giant array.
+
+  Therefore, we cannot easily `pop` / `reveal` elements.
+
+  What we can do instead is create arrays of elements, and `flatten` them as needed.
+]
+
+#slide(title: "An example", width: 30%, align: right)[
+
+  The diagram in `diagrams/demo-stages.typ` has an overview of the required steps to animate a diagram.
+
+  It includes `debug: 3` information so you can see the grid and the bounding box of nodes.
+
+  #illustration[
+  #include("/diagrams/demo-stages.typ")
+  ]
 ]
 
 

@@ -1,16 +1,26 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
 #import fletcher.shapes: pill
 #import "../lib/slides.typ": hl, pop, reveal
+#set text(size: 11pt)
+
+
+#let diagram_config = (
+  spacing: (10mm, 10mm),
+  node-stroke: luma(30%) + 1.5pt,
+  node-fill: luma(98%),
+  edge-stroke: luma(30%) + 1pt,
+  node-inset: 8pt,
+  debug: 3,
+)
+
 
 #let step0 = (
   node(
     (0, 0),
     [
-      We make *predictions*
-      \
-      $n$
+      This is the first node
     ],
-    width: 75mm,
+    width: 45mm,
     height: 20mm,
   ),
   node(
@@ -79,19 +89,10 @@
 
 #let steps = (step0, step1, step2, step3)
 
-#let diag_data = (
-  spacing: (10mm, 25mm),
-  node-stroke: luma(30%) + 1.5pt,
-  node-fill: luma(98%),
-  edge-stroke: luma(30%) + 1pt,
-  node-inset: 10pt,
-  debug: 0,
-)
-
 #for step in range(1, steps.len() + 1) {
   pop(on: step)[
     #diagram(
-      ..diag_data,
+      ..diagram_config,
       ..steps.slice(0, step).flatten(),
     )
   ]
