@@ -258,9 +258,17 @@
   The `onstage(n)` function returns `true` when the slide is currently on stage `n`, and this can be used for conditional formatting.
 
 
-  #{
-    let is_this_true = onstage(2)
-    is_this_true
+  #onstage(1) $#sym.arrow$ #type(onstage(1).fields().children.at(1))
+
+  #type(onstage(1).fields().children.at(1))
+
+  #onstage(1).fields().children.at(1)
+
+  #onstage(1) $#sym.arrow$ #onstage(1).fields().children.at(1)\
+  #if onstage(1).fields().children.at(1) == true {
+    [*This is slide 1*]
+  } else {
+    [_It might we slide 1 but we don't know_]
   }
 
   #if onstage(2) == [true] {
