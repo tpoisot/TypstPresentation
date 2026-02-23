@@ -257,6 +257,24 @@
 
   The `onstage(n)` function returns `true` when the slide is currently on stage `n`, and this can be used for conditional formatting.
 
+
+  #{
+    let is_this_true = onstage(2)
+    is_this_true
+  }
+
+  #if onstage(2) == [true] {
+    [On stage 2]
+  } else {
+    [
+      #for s in (1, 2, 3) {
+        [
+          Are we in stage #s? #h(1fr) #onstage(s)\
+        ]
+      }
+    ]
+  }
+
   #illustration[
     #block(
       fill: luma(88%),
@@ -265,15 +283,6 @@
       width: 100%,
     )[
       This element is always present, but has a border in stage 2, and a background in stage 3.
-
-      #context [On stage #nstage.get().first()]
-      
-      #if onstage(2) == false {
-        [On stage 2]
-      } else {
-        [Not on stage 2 #onstage(2)]
-      }
-
     ]
   ]
 
@@ -333,7 +342,7 @@
   It includes `debug: 3` information so you can see the grid and the bounding box of nodes.
 
   #illustration[
-  #include("/diagrams/demo-stages.typ")
+    #include "/diagrams/demo-stages.typ"
   ]
 ]
 

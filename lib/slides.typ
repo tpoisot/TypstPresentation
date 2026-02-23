@@ -124,6 +124,8 @@
         return mstage.update(n)
       }
     }
+  }
+  context {
     if n == nstage.get().first() { true } else { false }
   }
 }
