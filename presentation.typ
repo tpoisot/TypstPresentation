@@ -212,9 +212,11 @@
     pop(on: stage)[#stage]
   }
 
+  #stages(5)
+
   #v(5em)
 
-  *Known bug*: when the animations are in another function, they sometimes fail to render their final stages. Add a `#pop(on: n)[]` at the end of the slide with an empty string and this will fix it
+  *Known bug*: when the animations are in another function, they sometimes fail to render their final stages. Add a `#stages(n)` at the end of the slide with an empty string and this will fix it
 
 ]
 

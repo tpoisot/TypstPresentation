@@ -107,6 +107,14 @@
   _stage_builder(on: on, until: until, from: from, pop: true, body)
 }
 
+// This function can be used to set the maximum number of stages a slide must go
+// through
+#let stages(body) = {
+  context {
+    mstage.update(body)
+  }
+}
+
 // This function is used to handle slides with a space for illustration, in order to avoid using calls to grid, which does not play nice with reveal functions
 #let __slide_margin_calculation(align: left, width: 100%, realdim: 0pt) = {
   // Default margins
