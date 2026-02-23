@@ -248,12 +248,12 @@
   ]
 
   #v(1fr)
-  _  We are currently on stage #for stage in range(1, 5) { pop(on: stage)[#stage] }_
+  _We are currently on stage #for stage in range(1, 5) { pop(on: stage)[#stage] }_
 
 
 ]
 
-#slide(title: "Conditional formatting", width: 80%)[
+#slide(title: "Conditional formatting", width: 70%)[
 
   The `onstage(n)` function returns `true` when the slide is currently on stage `n`, and this can be used for conditional formatting.
 
@@ -266,17 +266,18 @@
     )[
       This element is always present, but has a border in stage 2, and a background in stage 3.
 
-      #context {
-        nstage.get().first()
-      }
+      #context [On stage #nstage.get().first()]
       
-      #type[#onstage(2, red, blue)]
-      #onstage(3, orange, red)
+      #if onstage(2) == false {
+        [On stage 2]
+      } else {
+        [Not on stage 2 #onstage(2)]
+      }
 
     ]
   ]
 
-  // #stages(3)
+  #stages(3)
 
 ]
 
